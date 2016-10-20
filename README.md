@@ -23,15 +23,15 @@
 
 # 跑Demo
 
-1. 先全局安装一个静态服务器
+- 先全局安装一个静态服务器
 
 `npm install  -g anywhere`
 
-2. 然后安装下项目的依赖
+- 然后安装下项目的依赖
 
 `npm install`
 
-3. 在项目下启动静态服务器[【anywhere说明文档】](https://www.npmjs.com/package/anywhere)
+- 在项目下启动静态服务器[【anywhere说明文档】](https://www.npmjs.com/package/anywhere)
 
 `anywhere 8858`
 
