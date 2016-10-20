@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML代码置入</title>
+    <style type="text/css" media="screen">
+        #demo2{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo2" v-html='htmltest'></div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /**
+         * html的置入区别于vue1，vue2中使用一个指令代替：v-html
+         */
+        new Vue({
+            el:'#demo2',
+            data:{
+                htmltest:'<span><b>哈哈</b></span>'
+            }
+        })
+    </script>
+</body>
+</html>

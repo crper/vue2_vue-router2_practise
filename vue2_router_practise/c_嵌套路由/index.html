@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello App!</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello App!</h1>
+        <div id="app">
+            <p>
+                <router-link to="/user/foo">/user/foo</router-link>
+                <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+                <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+            </p>
+            <router-view></router-view>
+        </div>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+    var User = {
+        template: `
+    <div class="user">
+      <h2>User {{ $route.params.id }}</h2>
+      <router-view></router-view>
+    </div>
+  `
+    }
+
+    var UserHome = {
+        template: '<div>Home</div>'
+    }
+    var UserProfile = {
+        template: '<div>Profile</div>'
+    }
+    var UserPosts = {
+        template: '<div>Posts</div>'
+    }
+
+    var router = new VueRouter({
+        routes: [{
+            path: '/user/:id',
+            component: User,
+            children: [
+                // 若是配置了带参数了路由，默认是不渲染，要渲染需要指定一个空路径，指定到某个组件
+                // 嵌套的核心就是路由允许嵌套的，子路由使用关键字`children`
+                {
+                    path: '',
+                    component: UserHome
+                },
+
+                // UserProfile will be rendered inside User's <router-view>
+                // when /user/:id/profile is matched
+                {
+                    path: 'profile',
+                    component: UserProfile
+                },
+
+                // UserPosts will be rendered inside User's <router-view>
+                // when /user/:id/posts is matched
+                {
+                    path: 'posts',
+                    component: UserPosts
+                }
+            ]
+        }]
+    })
+
+    var app = new Vue({
+        router
+    }).$mount('#app')
+    </script>
+</body>
+
+</html>

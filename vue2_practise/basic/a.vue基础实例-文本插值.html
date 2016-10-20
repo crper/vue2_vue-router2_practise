@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue实例</title>
+</head>
+<body>
+    <div id="demo1">{{hello}}</div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /**
+         * el绑定的是id
+         *  data是一个对象(ES5中)，ES6中必须以函数方式返回对象
+         *  {{}}是文本插值，会响应data内部对应的值(数据变动同步更新)
+         */
+        new Vue({
+            el:'#demo1',
+            data:{
+                hello:'Hello World!'
+            }
+        })
+    </script>
+</body>
+</html>

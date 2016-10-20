@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue表单控件的绑定</title>
+    <style type="text/css" media="screen">
+    div {
+        margin: 30px;
+        border: 3px solid #f5f5f5;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="demo11">
+        <div>
+            双向绑定
+            <input type="text" v-model="async_text_show" name="" placeholder="输入看结果">
+            <p>{{async_text_show}}</p>
+        </div>
+        <div>
+            多行文本双向
+            <textarea name="" v-model='multi_text' placeholder="输入看结果"></textarea>
+            <p v-pre>{{multi_text}}</p>
+        </div>
+        <div>
+            复选框
+            <input type="checkbox" id="checkbox" v-model="checked">
+            <label for="checkbox">{{ checked }}</label>
+        </div>
+        <div>
+            多个复选框组合
+            <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+            <label for="jack">Jack</label>
+            <input type="checkbox" id="john" value="John" v-model="checkedNames">
+            <label for="john">John</label>
+            <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+            <label for="mike">Mike</label>
+            <span>Checked names: {{ checkedNames }}</span>
+        </div>
+        <div>
+            单选按钮
+            <input type="radio" id="one" value="One" v-model="picked">
+            <label for="one">One</label>
+            <input type="radio" id="two" value="Two" v-model="picked">
+            <label for="two">Two</label>
+            <span>Picked: {{ picked }}</span>
+        </div>
+        <div>
+            单选下拉选项
+            <select v-model="selected">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <span>Selected: {{ selected }}</span>
+        </div>
+        <div>
+            多选下拉选项
+            <select v-model="selecteds" multiple>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <br>
+            <span>Selected: {{ selecteds }}</span>
+        </div>
+        <div>
+            结合v-for遍历选择
+            <select v-model="selected_city">
+                <option v-for="option in options" v-bind:value="option.value">
+                    {{ option.text }}
+                </option>
+            </select>
+            <span>Selected: {{ selected_city }}</span>
+        </div>
+        <div>
+            value绑定动态属性
+            <input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+            <input type="radio" v-model="toggleS" :value="c">
+            <span>{{toggle}}</span>
+        </div>
+        <div>
+            添加一个修饰符 lazy ，从而转变为在 change 事件中同步
+            <br>
+            <!-- 在 "change" 而不是 "input" 事件中更新 -->
+            <input v-model.lazy="msg" placeholder="onchange才会同步">
+            <span>{{msg}}</span>
+        </div>
+        <div>
+            转换输入为number类型
+            <input v-model.number="toNum" type="number">
+            {{toNum}}
+        </div>
+        <div>
+            去除输入框的空格
+            <input v-model.trim="msg_trim">
+            <span>{{msg_trim}}</span>
+        </div>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     *  v-model 并不关心表单控件初始化所生成的值。
+     *  它负责监听用户的输入事件以更新数据，并特别处理一些极端的例子。
+     *
+     */
+    new Vue({
+        el: '#demo11',
+        data: {
+            async_text_show: '',
+            multi_text: '',
+            checked: true,
+            checkedNames: [],
+            picked: '',
+            selected: '',
+            selecteds: [],
+            selected_city: '',
+            toggle: '',
+            a: 'AAAAA',
+            b: 'BBBB',
+            c: 'CCCC',
+            toggleS: '',
+            options: [{
+                text: '深圳市',
+                value: '深圳市'
+            }, {
+                text: '广州市',
+                value: '广州市'
+            }, {
+                text: '汕尾市',
+                value: '汕尾市'
+            }, ],
+            msg:'',
+            toNum:'',
+            msg_trim:'',
+
+        }
+    })
+    </script>
+</body>
+
+</html>

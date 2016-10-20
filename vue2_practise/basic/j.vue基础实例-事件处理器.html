@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue事件处理器</title>
+</head>
+
+<body>
+    <div id="demo10">
+        <form action="">
+            <button type="button" v-on:click='add'>{{count}}</button>
+            <button type="button" v-on:click='reduce(reset)'>点我重置左边按钮为0</button>
+            <button type="submit" <@submit></@submit>.prevent>阻止提交</button>
+        </form>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     * v-on 指令使用来绑定实现的，标准的写法是v-on:事件名，简写是@【v-on: === @】
+     *  内联语句处理器中访问原生 DOM 事件。可以用特殊变量 $event 把它传入方法
+     *  事件修饰符是原生事件的模拟,可以链式使用：
+     *  停止冒泡：@click.stop
+     *  阻止默认行为:@click.prevent
+     *  提供的按键别名有：enter,tab,delete,esc,space,up,down,left,right
+     *  v-on:keyup.enter 或者 @keyup.enter
+     */
+    new Vue({
+        el: '#demo10',
+        data: {
+            count: 0
+        },
+        methods: {
+            add: function(event) {
+                // `this` 在方法里指当前 Vue 实例
+                // `event` 是原生 DOM 事件
+                if (this.count / 5 > 1) {
+                    alert(event.target.tagName)
+                }
+                return this.count++
+            },
+            reduce: function(reset) {
+                var reset = 0;
+                return this.count = reset
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

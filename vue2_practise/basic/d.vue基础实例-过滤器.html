@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue过滤器-仅支持双括号里面</title>
+</head>
+
+<body>
+    <div id="demo4">{{test|str_reverse|str_uppercase}}</div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     *  过滤器只能在 mustache 绑定中使用
+     *  过滤器是 JavaScript 函数，因此可以接受参数：fun(arg1,arg2)
+     *  过滤器可以串联 {{ message | filterA | filterB }}
+     */
+    new Vue({
+        el: '#demo4',
+        data: {
+            test: 'i have a dream!',
+        },
+        filters: {
+            str_reverse: function(value) {
+                return value.split('').reverse().join('')
+            },
+            str_uppercase: function(value) {
+                return value.toUpperCase()
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue双大括号内JS表达式的支持演示</title>
+</head>
+<body>
+    <div id="demo3">{{test?'我正确的执行了布尔表达式':'什么狗屁'}}</div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /**
+         *  {{}}是允许JS表达式的，只要的合法的写法都支持
+         */
+        new Vue({
+            el:'#demo3',
+            data:{
+                test:true
+            }
+        })
+    </script>
+</body>
+</html>

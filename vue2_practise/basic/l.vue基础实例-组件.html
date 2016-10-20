@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件</title>
+</head>
+<body>
+    <div id="demo12"  >
+        <first-component>
+            <slot>
+                如果没有内容就显示我吧，呵呵哒！！！
+            </slot>
+        </first-component>
+        <second-component :message="name" ></second-component>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /*
+         *  全局组件使用Vue.component(tagName, options)注册
+         *  局部注册，用实例选项 components 注册
+         *  prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。
+         *  这是为了防止子组件无意修改了父组件的状态——这会让应用的数据流难以理解.[prop其实就是拿父组件的data]
+         *  比较复杂的这些这里模拟不了，需要写成.vue组件来组合不同的组件状态
+         */
+
+        Vue.component('first-component',{
+            template:'<span>我是第一个全局组件</span>',
+        })
+
+        var Child = {
+            template: '<div>A custom component!{{message}}</div>',
+            props:['message']
+        }
+        new Vue({
+            el:'#demo12',
+            data:{
+                hello:'Hello World!',
+                name:'LinQ'
+            },
+            components:{
+                'second-component':Child
+            }
+        })
+    </script>
+</body>
+</html>

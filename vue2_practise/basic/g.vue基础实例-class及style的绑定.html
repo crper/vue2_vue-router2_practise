@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中class及style的绑定</title>
+    <style type="text/css" media="screen">
+    .red {
+        color: #FF0000;
+    }
+
+    .purple {
+        color: #C10ED7;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .btn {
+        border-radius: 3px;
+        padding: 10px 20px;
+    }
+
+    .success {
+        bacground: #12CB3B;
+        color: #fff;
+    }
+
+    .error {
+        background: #f00;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="demo7">
+        <h1 v-bind:class="{red:isActive,'text-center':isCenter}">标题</h1>
+        <p :class='classObject'>描述一下<span>高亮</span></p>
+        <br>
+        <button type="button" :class="['btn',statusSuccess]">true</button>
+        <button type="button" :class="['btn',statusError]">false</button>
+        <p v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">行内样式</p>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     *  允许绑定一个对象或者对象名，亦或者数组；使用v-bind;简写是:
+     *  数组内字符串是直接添加该类，不带字符串是对象key，数组内支持JS三元表达式
+     *  行内样式的绑定和class绑定大同小异~~~~
+     */
+    new Vue({
+        el: '#demo7',
+        data: {
+            isActive: true,
+            isCenter: true,
+            classObject: {
+                'purple': true
+            },
+            'statusSuccess': 'success',
+            'statusError': 'error',
+            activeColor: 'red',
+            fontSize: 30
+
+        }
+    })
+    </script>
+</body>
+
+</html>

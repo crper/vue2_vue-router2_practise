@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue条件渲染</title>
+</head>
+<body>
+    <div id="demo8">
+        <template v-if="t_show">
+            <h1>我是模板片段里面的</h1>
+        </template>
+        <template v-if="t_hide">
+            我是模板片段里面的
+        </template>
+        <template v-else>
+           <h2> t_hide不出来，那就我来吧~~~</h2>
+        </template>
+
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+        /**
+         *  v-if和v-show我们在之前已经讲到过，
+         *  这里主要讲讲v-else
+         *  v-else 元素必须立即跟在 v-if 或 v-show 元素的后面——否则它不能被识别
+         *  v-else 指令是给 v-if 或 v-show 添加一个 “else 块”
+         *  简言之：频繁切换推荐v-show,反之v-if；
+         */
+        new Vue({
+            el:'#demo8',
+            data:{
+                t_show:true,
+                t_false:false,
+            }
+        })
+    </script>
+</body>
+</html>

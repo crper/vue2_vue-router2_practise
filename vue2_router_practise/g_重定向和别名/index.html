@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello App!</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello App!</h1>
+        <p>
+            <!-- 使用router-link组件来导航 -->
+            <!-- 通过传入 `to` 属性指定链接 -->
+            <!-- <router-link>默认会被渲染成一个`<a>`标签 -->
+            <router-link :to="'alias_name'">绑定写法</router-link>
+            <router-link to='/foo'>路由到foo</router-link>
+            <router-link to='/bar'>路由到bar</router-link>
+            <router-link to='/alias_name'>路由到alias_name</router-link>
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+        </p>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+    var Foo = {
+        template: '<div>我是foo页面的内容</div>'
+    }
+    var Bar = {
+        template: '<div>我是bar页面的内容</div>'
+    }
+    var Car = {
+        template: '<div>我是Car页面的内容</div>'
+    }
+
+    //重定向主要关键词是 redirect,可以作用于普通路由或者命名路由
+    //别名主要是用了关键词 alias
+    var routes = [{
+        path: '/foo',
+        redirect: {name:'ttttt'}
+
+    }, {
+        path: '/bar',
+        component: Bar,
+        name:'ttttt'
+    },
+    {
+        path: '/alias_name',
+        component: Foo,
+        alias:'/my_router_path_alias'
+    }]
+    var router = new VueRouter({
+        routes // （缩写）相当于 routes: routes
+    })
+    var app = new Vue({
+        router,
+        el:'#app'
+    })
+    </script>
+</body>
+
+</html>

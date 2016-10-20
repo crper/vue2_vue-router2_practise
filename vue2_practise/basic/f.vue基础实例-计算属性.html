@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的computed,计算属性</title>
+</head>
+
+<body>
+    <div id="demo6">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     *  任何复杂逻辑，都应当使用计算属性。
+     *  计算属性的 getter 是干净无副作用的，因此也是易于测试和理解的。
+     *  computed的好处是依赖，有缓存；methods可以做到，但还是有差异；具体体现在性能上
+     *  ----------------------------------
+     *  假设我们有一个重要的计算属性 A ，
+     *  这个计算属性需要一个巨大的数组遍历和做大量的计算。然后我们可能有其他的计算属性依赖于 A。
+     *  如果没有缓存，我们将执行多次 A 的 getter *，
+     * 然而这都是不必要的！如果你不希望有缓存，请用method替代。
+     *
+     * vue中的this是指向的都是当前实例或者组件！！！！！！
+     */
+    new Vue({
+        el: '#demo6',
+        data: {
+            message: 'I have a dream!'
+        },
+        computed: {
+            // a computed getter
+            reversedMessage: function() {
+                // `this` points to the vm instance
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "vue2-practise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "url": "git@git.oschina.net:crper/vue2-practise.git",
+    "type": "git"
+  },
+  "author": "CRPER <crper@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.0.3",
+    "vue-router": "^2.0.1",
+    "vuex": "^2.0.0"
+  }
+}

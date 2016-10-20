@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello App!</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello App!</h1>
+        <div id="app">
+            <button type="button" @click='back'>点击返回上一页</button>
+            <button type="button" @click='next'>点击返回下一页</button>
+            <p>
+                <router-link to="/user/foo">/user/foo</router-link>
+                <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+                <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+            </p>
+            <router-view></router-view>
+        </div>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+    <script>
+    var User = {
+        template: `
+    <div class="user">
+      <h2>User {{ $route.params.id }}</h2>
+      <router-view></router-view>
+    </div>
+  `
+    }
+
+    var UserHome = {
+        template: '<div>Home</div>'
+    }
+    var UserProfile = {
+        template: '<div>Profile</div>'
+    }
+    var UserPosts = {
+        template: '<div>Posts</div>'
+    }
+
+    var Register = {
+        template: '<div>我是push进来的</div>'
+    }
+
+    var PP = {
+        template: '<div>我是push进去的</div>'
+    }
+    var router = new VueRouter({
+        routes: [{
+            path: '/user/:id',
+            component: User,
+            children: [
+                // 若是配置了带参数了路由，默认是不渲染，要渲染需要指定一个空路径，指定到某个组件
+                // 嵌套的核心就是路由允许嵌套的，子路由使用关键字`children`
+                {
+                    path: '',
+                    component: UserHome
+                },
+
+                // UserProfile will be rendered inside User's <router-view>
+                // when /user/:id/profile is matched
+                {
+                    path: 'profile',
+                    component: UserProfile
+                },
+
+                // UserPosts will be rendered inside User's <router-view>
+                // when /user/:id/posts is matched
+                {
+                    path: 'posts',
+                    component: UserPosts
+                }
+            ]
+        }]
+    })
+    var app = new Vue({
+        router,
+        el: '#app',
+        methods: {
+            back: function() {
+                return this.$router.go(-1) //后退一页
+            },
+            next: function() {
+                return this.$router.go(1) //前进一页
+            }
+        }
+    })
+
+    router.push({
+            name: 'user/:pu',
+            params: {
+                userId: 123
+            },
+            component: PP
+        })
+        // 带查询参数，变成 /register?plan=private
+    router.push({
+        path: '/user/:register',
+        component: Register,
+        query: {
+            plan: 'private'
+        }
+    })
+    </script>
+</body>
+
+</html>

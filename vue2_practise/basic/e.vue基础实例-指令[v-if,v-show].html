@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的指令</title>
+</head>
+
+<body>
+    <div id="demo5">
+        可以打开浏览器调试工具选取元素看到他们的差异；配合vue-devtools口味更加
+        <h1 v-if='i_hide'>我没有被渲染</h1>
+        <h2 v-show='s_hide'>我被渲染了，但是看不到</h2>
+        <h3 v-if='i_show'>我被渲染了，也看到了</h3>
+        <h4 v-show='s_show'>我也被渲染了</h4>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     *  v-if和v-show的本质区别；
+     *  v-if是动态的渲染dom;
+     *  v-show是必须渲染了，在页面用样式控制display来显示隐藏
+     */
+    new Vue({
+        el: '#demo5',
+        data: {
+            i_hide:false,
+            s_hide:false,
+            i_show:true,
+            s_show:true,
+        },
+    })
+    </script>
+</body>
+
+</html>

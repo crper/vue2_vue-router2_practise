@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue列表渲染</title>
+</head>
+
+<body>
+    <div id="demo9">
+        <ul>
+            <li v-for="item in items" :key="item.id" >{{item.message}}</li>
+        </ul>
+        <ol>
+            <li v-for="(item,index) in items">
+                {{item.message}} ---- {{index}}
+            </li>
+        </ol>
+        <ul>
+            <li v-for='value in testObj'>{{value}}</li>
+        </ul>
+        <ul>
+            <li v-for='(value,key) in testObj'>{{key}}-{{value}}</li>
+        </ul>
+        <ul>
+            <li v-for='(value,key,index) in testObj'>{{index}}-{{key}}-{{value}}</li>
+        </ul>
+        <p> <span v-for='n in 10'>{{n}}</span></p>
+         <p> <span v-for='s in evenNum'>{{s}}</span></p>
+    </div>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+    /**
+     * v-for 指令根据一组数组的选项列表进行渲染。
+     *  v-for 指令需要以 item in items 形式的特殊语法， items 是源数据数组并且 item 是数组元素迭代的别名。
+     *  在 v-for 块内部，我们有完全访问父作用域的属性。 v-for 还支持一个可选的第二个参数为当前项的索引。
+     *  你也可以用 of 替代 in 作为分隔符，所以它是最接近 JavaScript 迭代器的语法：
+     *
+     *  当然你可以遍历对象，作者修改了。in遍历实例data出来的。数据排序依次如下
+     *  value[第一个参数],第二个的参数为键名,第三个才是索引
+     *  原生的in遍历出来的是key
+     *
+     *  v-for也能遍历数字和组件
+     *  V-for也可以借助computed，method进行排序或者过滤
+     */
+    new Vue({
+        el: '#demo9',
+        data: {
+            items: [{
+                message: '我是第一条信息',
+            }, {
+                message: '我是第二条信息',
+            }, {
+                message: '我是第三条信息',
+            }, ],
+            testObj: {
+                FirstName: 'Lin',
+                LastName: 'Q',
+                Age: 10
+            },
+            filterArray:[1,2,3,4,5,6,7,8,9,10]
+        },
+        computed:{
+            evenNum:function(){
+                return this.filterArray.filter(function(values){
+                    return values % 2 === 0
+                })
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
